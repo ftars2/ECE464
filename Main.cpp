@@ -235,7 +235,15 @@ void gateMapValues(map<string,vector<string>> gateMapData, vector<string> gatesL
   gateData(line, gateName, gate, input);
 
 }
+void outputfaults(map<string, int> temp){
+  cout<<endl<<"all potential faults in the circuit:"<<endl;
 
+  for (auto a = temp.begin(); a != temp.end(); a++) {
+    cout<< endl<< "node "<<(*a).first<<" stuck at 0/1.";
+  }
+
+return;
+}
 int main() {
   // Only used for the file reading
   ifstream Myfile;
@@ -244,12 +252,12 @@ int main() {
   vector<string> outputs;
   
   // Only used in file reading and will be empty at the end
-  list<string> gates;
+  list<string> gates;//extra
 
   // Will contain all relevant data for future uses
-  vector<string> gatelist;
-  map<string,int> gatevalue;
-  map<int,vector<string>> levelization;
+  vector<string> gatelist;//original list
+  map<string,int> gatevalue;//a=x
+  map<int,vector<string>> levelization;// ordered by levilzation
 
   // Copies the data from the file into a vectors
   if (Myfile.is_open()) {
@@ -322,5 +330,6 @@ int main() {
   }
 
   printMap(levelization);
+  outputfaults(gatevalue);
   return 0;
 }
